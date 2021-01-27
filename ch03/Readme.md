@@ -1,8 +1,9 @@
 # Chapter 3 - Ad-Hoc Commands
 
-### Development Environment
+## Development Environment
 
 [ubuntu-ssh-enabled](https://github.com/mmumshad/ubuntu-ssh-enabled)
+
 ```
 docker run -d --name server1 mmumshad/ubuntu-ssh-enabled
 docker run -d --name server2 mmumshad/ubuntu-ssh-enabled
@@ -13,14 +14,16 @@ cat ~/.ssh/id_rsa.pub | docker exec -i server1  /bin/bash -c "cat >> /root/.ssh/
 cat ~/.ssh/id_rsa.pub | docker exec -i server2  /bin/bash -c "cat >> /root/.ssh/authorized_keys"
 ```
 
-### Inventory file for multiple servers
+## Inventory file for multiple servers
 ansible.cfg
+
 ```
 [defaults]
 inventory = inventory
 ```
 
 inventory
+
 ```
 # Application Servers
 [app]
@@ -41,7 +44,8 @@ ansible_ssh_user=root
 ansible_ssh_private_key_file=~/.ssh/id_rsa
 ```
 
-### Ansible ad-hoc commands
+## Ansible ad-hoc commands
+
 ```
 ansible multi -a "date"                                                            
 172.17.0.2 | CHANGED | rc=0 >>
@@ -49,11 +53,13 @@ Wed Jan 27 01:29:23 UTC 2021
 ```
 
 Increase the value of Ansible fork to speed up the process of running commands on tens or hundreds of servers
+
 ```
 ansible multi -a "date" -t 2
 ```
 
 Run Ansible asynchronously
+
 ```
 # -b BECOME_METHOD
 # -B SECONDS, --background SECONDS run asynchronously, failing after X seconds (default=N/A)
